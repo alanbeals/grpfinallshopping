@@ -1,10 +1,8 @@
-package com.example.grpfinallshopping;
+package com.example.grpfinalshopping;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-
-import com.example.grpfinalshopping.R;
 
 public class MainActivity extends AppCompatActivity {
 
