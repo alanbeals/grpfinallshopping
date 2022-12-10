@@ -1,4 +1,4 @@
-package com.example.grpfinalshopping;
+package com.example.grpfinallshopping;
 
 import org.junit.Test;
 
