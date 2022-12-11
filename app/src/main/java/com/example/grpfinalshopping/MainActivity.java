@@ -3,23 +3,18 @@ package com.example.grpfinalshopping;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
-import com.example.grpfinalshopping.R;
 
 public class MainActivity extends AppCompatActivity {
-
-    Button btnTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnTest = findViewById(R.id.btnTest);
         DbHelper dbHelper = new DbHelper(this);
+
+//        ArrayList<Product> products = dbHelper.getAllProducts();
+
 //        dbHelper.addUser("Luke Skywalker 2", "111-111-1111", "111 Some Galaxy", "Death Star 2", "BC", "A2A 2A2");
 //
 //        dbHelper.addProduct("Apple", 1);

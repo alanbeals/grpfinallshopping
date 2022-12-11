@@ -8,7 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Date;
+
+import entities.Product;
 
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -97,6 +100,31 @@ public class DbHelper extends SQLiteOpenHelper {
         db.insert(PRODUCT_TABLE, null, values);
         db.close();
     }
+    public ArrayList<Product> getAllProducts()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        Cursor cr = db.rawQuery("SELECT " + PRODUCT_NAME_COL + ", " + PRODUCT_PRICE_COL
+                + " FROM " + PRODUCT_TABLE
+                , null);
+
+        ArrayList<Product> productArrayList = new ArrayList<>();
+
+        cr.moveToFirst();
+        if(cr.getCount() > 0)
+        {
+            do
+            {
+                productArrayList.add(new Product(cr.getString(0),cr.getDouble(1)));
+            } while (cr.moveToNext());
+        }
+
+        db.close();
+        return productArrayList;
+    }
+
+
 
     public void addUser(String fullName, String phoneNumber, String streetAddress, String city,
                               String province, String postalCode)
@@ -160,6 +188,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.close();
     }
+
 
     private int getIncompleteOrderId (int userId)
     {
