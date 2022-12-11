@@ -8,10 +8,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
+import entities.Order;
+import entities.OrderItem;
 import entities.Product;
+import entities.User;
 
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -29,10 +35,7 @@ public class DbHelper extends SQLiteOpenHelper {
     // user table specific columns
     private static final String USER_FULL_NAME_COL = "full_name";
     private static final String USER_PHONE_NUMBER_COL = "phone_number";
-    private static final String USER_STREET_ADDRESS_COL = "street_address";
-    private static final String USER_CITY_COL = "city";
-    private static final String USER_PROVINCE_COL = "province";
-    private static final String USER_POSTAL_CODE_COL = "postal_code";
+    private static final String USER_ADDRESS_COL = "address";;
 
     // order table specific columns
     private static final String ORDER_USER_ID_COL = "user_id";
@@ -60,10 +63,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 USER_FULL_NAME_COL + " TEXT NOT NULL," +
                 USER_PHONE_NUMBER_COL + " TEXT NOT NULL," +
-                USER_STREET_ADDRESS_COL + " TEXT NOT NULL," +
-                USER_CITY_COL + " TEXT NOT NULL," +
-                USER_PROVINCE_COL + " TEXT NOT NULL," +
-                USER_POSTAL_CODE_COL + " TEXT NOT NULL" + ")"
+                USER_ADDRESS_COL + " TEXT NOT NULL" + ")"
         );
 
         sqLiteDatabase.execSQL("CREATE TABLE " + ORDER_TABLE + "(" +
@@ -100,12 +100,13 @@ public class DbHelper extends SQLiteOpenHelper {
         db.insert(PRODUCT_TABLE, null, values);
         db.close();
     }
+
     public ArrayList<Product> getAllProducts()
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        Cursor cr = db.rawQuery("SELECT " + PRODUCT_NAME_COL + ", " + PRODUCT_PRICE_COL
+        Cursor cr = db.rawQuery("SELECT " + ID_COL + ", " + PRODUCT_NAME_COL + ", " + PRODUCT_PRICE_COL
                 + " FROM " + PRODUCT_TABLE
                 , null);
 
@@ -116,7 +117,13 @@ public class DbHelper extends SQLiteOpenHelper {
         {
             do
             {
-                productArrayList.add(new Product(cr.getString(0),cr.getDouble(1)));
+                productArrayList.add(
+                        new Product(
+                                cr.getInt(0),
+                                cr.getString(1),
+                                cr.getDouble(2)
+                        )
+                );
             } while (cr.moveToNext());
         }
 
@@ -124,40 +131,58 @@ public class DbHelper extends SQLiteOpenHelper {
         return productArrayList;
     }
 
-
-
-    public void addUser(String fullName, String phoneNumber, String streetAddress, String city,
-                              String province, String postalCode)
+    public void addUser(String fullName, String phoneNumber, String address)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put(USER_FULL_NAME_COL, fullName);
         values.put(USER_PHONE_NUMBER_COL, phoneNumber);
-        values.put(USER_STREET_ADDRESS_COL, streetAddress);
-        values.put(USER_CITY_COL, city);
-        values.put(USER_PROVINCE_COL, province);
-        values.put(USER_POSTAL_CODE_COL, postalCode);
+        values.put(USER_ADDRESS_COL, address);;
 
         db.insert(USER_TABLE, null, values);
         db.close();
     }
 
-    public void updateUserProfile(int id, String fullName, String phoneNumber, String streetAddress, String city,
-                              String province, String postalCode)
+    public void updateUserProfile(int id, String fullName, String phoneNumber, String address)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put(USER_FULL_NAME_COL, fullName);
         values.put(USER_PHONE_NUMBER_COL, phoneNumber);
-        values.put(USER_STREET_ADDRESS_COL, streetAddress);
-        values.put(USER_CITY_COL, city);
-        values.put(USER_PROVINCE_COL, province);
-        values.put(USER_POSTAL_CODE_COL, postalCode);
+        values.put(USER_ADDRESS_COL, address);
 
         db.update(USER_TABLE, values,"id=?", new String[]{String.valueOf(id)});
         db.close();
+    }
+
+    public User getUserById(int userId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        Cursor cr = db.rawQuery("SELECT " + ID_COL + ", " + USER_FULL_NAME_COL + ", " + USER_PHONE_NUMBER_COL + ", " + USER_ADDRESS_COL
+                        + " FROM " + USER_TABLE
+                        + " WHERE " + ID_COL + " = " + userId
+                , null);
+
+        User user = new User();
+
+        cr.moveToFirst();
+        if(cr.getCount() > 0)
+        {
+            user = new User(
+                cr.getInt(0),
+                cr.getString(1),
+                cr.getString(2),
+                cr.getString(3)
+
+            );
+        }
+
+        db.close();
+        return user;
     }
 
     public void addToCart(int userId, int productId)
@@ -188,6 +213,123 @@ public class DbHelper extends SQLiteOpenHelper {
 
         db.close();
     }
+
+    public void placeOrder(int userId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        int orderId = getIncompleteOrderId(userId);
+
+        if(orderId != -1)
+        {
+            values.put(ORDER_DATE_COL, String.valueOf(LocalDateTime.now()));
+            db.update(ORDER_TABLE, values,"id=?", new String[]{String.valueOf(orderId)});
+            db.close();
+        }
+    }
+
+    public ArrayList<Order> getCompletedOrdersByUserId(int userId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cr = db.rawQuery("SELECT " + ID_COL + ", " + ORDER_USER_ID_COL + ", " + ORDER_SHIPPING_ADDRESS_COL + ", " + ORDER_DATE_COL
+                        + " FROM " + ORDER_TABLE
+                        + " WHERE " + ORDER_USER_ID_COL + " = " + userId + " AND " + ORDER_DATE_COL + " IS NOT NULL "
+                , null);
+
+        ArrayList<Order> orderArrayList = new ArrayList<>();
+
+        cr.moveToFirst();
+        if(cr.getCount() > 0)
+        {
+            do
+            {
+                Order order = new Order(
+                    cr.getInt(0),
+                    cr.getInt(1),
+                    cr.getString(2),
+                    cr.getString(3)
+                );
+
+                order.setOrderItems(getOrderItemsByOrderId(order.getId()));
+                orderArrayList.add(order);
+            } while (cr.moveToNext());
+        }
+
+        db.close();
+        return orderArrayList;
+    }
+
+    // A cart is basically an incomplete order, which is equal to an order without an Order Date (meaning, it wasn't placed yet)
+    public Order getCartByUserId(int userId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cr = db.rawQuery("SELECT " + ID_COL + ", " + ORDER_USER_ID_COL + ", " + ORDER_SHIPPING_ADDRESS_COL + ", " + ORDER_DATE_COL
+                        + " FROM " + ORDER_TABLE
+                        + " WHERE " + ORDER_USER_ID_COL + " = " + userId + " AND " + ORDER_DATE_COL + " IS NULL "
+                , null);
+
+        Order incompleteOrder = new Order();
+
+        cr.moveToFirst();
+        if(cr.getCount() > 0)
+        {
+            incompleteOrder = new Order(
+                    cr.getInt(0),
+                    cr.getInt(1),
+                    cr.getString(2),
+                    cr.getString(3)
+            );
+
+            incompleteOrder.setOrderItems(getOrderItemsByOrderId(incompleteOrder.getId()));
+        }
+
+        db.close();
+        return incompleteOrder;
+    }
+
+
+
+    // ------------------------- PRIVATE METHODS FOR BUSINESS LOGIC -------------------------------
+
+    private ArrayList<OrderItem> getOrderItemsByOrderId(int orderId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cr = db.rawQuery("SELECT " + PRODUCT_TABLE + "." + ID_COL + ", " + PRODUCT_TABLE + "." + PRODUCT_NAME_COL + ", " + PRODUCT_TABLE + "." + PRODUCT_PRICE_COL + ", "
+                            + ORDER_ITEM_TABLE + "." + ID_COL + ", " + ORDER_ITEM_TABLE + "." + ORDER_ITEM_ORDER_ID_COL + ", " + ORDER_ITEM_TABLE + "." + ORDER_ITEM_PRODUCT_ID_COL + ", "
+                            + ORDER_ITEM_TABLE + "." + ORDER_ITEM_PRICE_PER_UNIT_COL + ", " + ORDER_ITEM_TABLE + "." + ORDER_ITEM_QUANTITY_COL
+                        + " FROM " + PRODUCT_TABLE
+                        + " JOIN " + ORDER_ITEM_TABLE
+                            + " ON " + PRODUCT_TABLE + "." + ID_COL + " = " + ORDER_ITEM_TABLE + "." + ORDER_ITEM_PRODUCT_ID_COL
+                        + " WHERE " + ORDER_ITEM_TABLE + "." + ORDER_ITEM_ORDER_ID_COL + " = " + orderId
+                , null);
+
+        ArrayList<OrderItem> orderItems = new ArrayList<>();
+
+        cr.moveToFirst();
+        if(cr.getCount() > 0)
+        {
+            do {
+                Product product = new Product(cr.getInt(0), cr.getString(1), cr.getDouble(2));
+                orderItems.add(new OrderItem(
+                        cr.getInt(3),
+                        cr.getInt(4),
+                        cr.getInt(5),
+                        cr.getDouble(6),
+                        cr.getInt(7),
+                        product
+                ));
+
+            } while (cr.moveToNext());
+
+        }
+
+        return orderItems;
+    }
+
 
 
     private int getIncompleteOrderId (int userId)
@@ -227,10 +369,7 @@ public class DbHelper extends SQLiteOpenHelper {
         Cursor cr = db.rawQuery("SELECT "
                         + USER_FULL_NAME_COL + " || ', ' || "
                         + USER_PHONE_NUMBER_COL + " || ', ' || "
-                        + USER_STREET_ADDRESS_COL  + " || ', ' || "
-                        + USER_CITY_COL  + " || ', ' || "
-                        + USER_PROVINCE_COL  + " || ', ' || "
-                        + USER_POSTAL_CODE_COL
+                        + USER_ADDRESS_COL
                         + " FROM " + USER_TABLE + " WHERE " + ID_COL + "=" + userId
                 ,null);
 
@@ -300,6 +439,12 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        // Drop older table if exist
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ORDER_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ORDER_ITEM_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PRODUCT_TABLE);
+        // Create tables again
+        onCreate(sqLiteDatabase);
     }
 }
