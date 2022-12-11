@@ -10,11 +10,14 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/smsback"/>
+        android:scaleType="fitXY"
+        android:src="@drawable/grocery" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:src="@drawable/sms"/>
+        android:src="@drawable/grocery_sign"/>
+
 
 </FrameLayout>
