@@ -1,11 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PROFILE SCREEN"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/TV_Profile"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Profile"
+            android:textSize="30dp"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>
+
+        <EditText
+            android:id="@+id/ET_Name"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:paddingTop="10dp"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/RY_Email"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="Email"/>
+
+        <EditText
+            android:id="@+id/ET_Phone"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:ems="10"
+            android:inputType="phone"
+            android:hint="Number"/>
+
+        <Button
+            android:id="@+id/BTN_Credit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Credit Info" />
+
+        <Button
+            android:id="@+id/BTN_Home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Home" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/grocery_sign"/>
+
+    </LinearLayout>
+</LinearLayout>

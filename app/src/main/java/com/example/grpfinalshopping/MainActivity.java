@@ -3,6 +3,7 @@ package com.example.grpfinalshopping;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -39,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
 //        ArrayList<Order> orders = dbHelper.getCompletedOrdersByUserId(1);
 //        Order order = dbHelper.getCartByUserId(1);
+
+    }
+
+    public void OpenCart(View view){
 
     }
 }
