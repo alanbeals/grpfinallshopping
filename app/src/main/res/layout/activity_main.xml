@@ -21,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
+        android:paddingTop="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toStartOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/imageView2"
@@ -31,15 +32,186 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:paddingTop="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView"
         app:srcCompat="@drawable/ic_settings" />
 
-    <ListView
-        android:id="@+id/LV_Items"
-        android:layout_width="fill_parent"
+
+    <!--PRODUCT GRID-->
+    <GridLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:divider="@color/material_blue_grey_800"
-        android:dividerHeight="1dp" />
+        android:paddingTop="10dp"
+        android:rowCount="10"
+        android:columnCount="2">
+
+
+        <!--ITEMS-->
+
+        <!--APPLE-->
+        <TextView
+            android:id="@+id/TV_Apple"
+            android:layout_width="130sp"
+            android:layout_height="wrap_content"
+            android:text="Apple"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"/>
+        <Button
+            android:id="@+id/BTN_AddApple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart">
+        </Button>
+
+        <!--BANANA-->
+        <TextView
+            android:id="@+id/TV_Banana"
+            android:layout_width="130sp"
+            android:layout_height="wrap_content"
+            android:text="Banana"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"/>
+        <Button
+            android:id="@+id/BTN_AddBanana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart">
+        </Button>
+
+        <!--CHERRY-->
+        <TextView
+            android:id="@+id/TV_Cherry"
+            android:layout_width="130sp"
+            android:layout_height="wrap_content"
+            android:text="Cherry"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"/>
+        <Button
+            android:id="@+id/BTN_AddCherry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart">
+        </Button>
+
+        <!--GRAPE-->
+        <TextView
+            android:id="@+id/TV_Grape"
+            android:layout_width="130sp"
+            android:layout_height="wrap_content"
+            android:text="Grape"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"/>
+        <Button
+            android:id="@+id/BTN_AddGrape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart">
+        </Button>
+
+        <!--ORANGE-->
+        <TextView
+            android:id="@+id/TV_Orange"
+            android:layout_width="130sp"
+            android:layout_height="wrap_content"
+            android:text="Orange"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"/>
+        <Button
+            android:id="@+id/BTN_AddOrange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart">
+        </Button>
+
+        <!--CARROT-->
+        <TextView
+            android:id="@+id/TV_Carrot"
+            android:layout_width="130sp"
+            android:layout_height="wrap_content"
+            android:text="Carrot"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"/>
+        <Button
+            android:id="@+id/BTN_AddCarrot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart">
+        </Button>
+
+        <!--CELERY-->
+        <TextView
+            android:id="@+id/TV_Celery"
+            android:layout_width="130sp"
+            android:layout_height="wrap_content"
+            android:text="Celery"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"/>
+        <Button
+            android:id="@+id/BTN_AddCelery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart">
+        </Button>
+
+        <!--ONION-->
+        <TextView
+            android:id="@+id/TV_Onion"
+            android:layout_width="130sp"
+            android:layout_height="wrap_content"
+            android:text="Onion"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"/>
+        <Button
+            android:id="@+id/BTN_AddOnion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart">
+        </Button>
+
+        <!--POTATO-->
+        <TextView
+            android:id="@+id/TV_Potato"
+            android:layout_width="130sp"
+            android:layout_height="wrap_content"
+            android:text="Potato"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"/>
+        <Button
+            android:id="@+id/BTN_AddPotato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart">
+        </Button>
+
+        <!--TOMATO-->
+        <TextView
+            android:id="@+id/TV_Tomato"
+            android:layout_width="130sp"
+            android:layout_height="wrap_content"
+            android:text="Tomato"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingTop="10dp"/>
+        <Button
+            android:id="@+id/BTN_AddTomato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart">
+        </Button>
+
+
+
+
+    </GridLayout>
 </LinearLayout>
