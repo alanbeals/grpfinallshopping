@@ -6,7 +6,7 @@
     android:background="#ffffff">
 
     <TextView
-        android:id="@+id/TextView01"
+        android:id="@+id/TV_Cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
@@ -18,7 +18,7 @@
     <ListView
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:id="@+id/ListViewCatalog"
+        android:id="@+id/LV_Cart"
         android:layout_width="fill_parent"
         android:background="#ffffff"
         android:cacheColorHint="#ffffff"
@@ -36,15 +36,17 @@
 
         <Button
 
+            android:id="@+id/BTN_Remove"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ButtonRemoveFromCart"
             android:text="Remove from Cart"
-            style="?android:attr/buttonBarButtonStyle">
+            android:paddingRight="50dp">
 
         </Button>
+
         <Button
-            android:id="@+id/Button02"
+            android:id="@+id/BTN_Checkout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Proceed to Checkout"

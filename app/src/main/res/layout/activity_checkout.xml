@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    android:background="#ffffff">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/TV_Checkout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="24dip"
+        android:layout_margin="5dip"
+        android:text="Checkout">
+
+    </TextView>
+
+    <ListView
+        android:id="@+id/LV_Checkout"
+        android:layout_width="match_parent"
+        android:layout_height="598dp"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:cacheColorHint="#ffffff"
+        android:choiceMode="multipleChoice"
+        android:clickable="true">
+
+    </ListView>
+    <GridLayout
+        android:id="@+id/GV_Order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right"
+        android:layout_margin="5dip"
+        android:rowCount="1"
+        android:columnCount="2">
+
+        <Button
+            android:id="@+id/BTN_Order"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Place Order"
+            android:textStyle="bold">
+
+        </Button>
+    </GridLayout>
+
+    <CheckBox
+        android:id="@+id/CHK_Credit"
+        android:layout_width="187dp"
+        android:layout_height="wrap_content"
+        android:paddingRight="60dp"
+        android:text="Confirm Credit Card"
+        android:textSize="17dp"
+        android:textStyle="bold" />
+</LinearLayout>

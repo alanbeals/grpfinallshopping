@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/TV_Profile"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="Profile"
@@ -19,7 +19,7 @@
             android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/ET_Name"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:ems="10"
@@ -28,7 +28,7 @@
             android:text="Name" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/RY_Email"
             android:layout_width="match_parent"
             android:layout_height="85dp"
             android:ems="10"
@@ -36,7 +36,7 @@
             android:hint="Email"/>
 
         <EditText
-            android:id="@+id/editTextPhone"
+            android:id="@+id/ET_Phone"
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:ems="10"
@@ -44,7 +44,13 @@
             android:hint="Number"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/BTN_Credit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Credit Info" />
+
+        <Button
+            android:id="@+id/BTN_Home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Home" />
