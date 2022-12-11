@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(i);
                 finish();
             }
-        },100);
+        },5000);
     }
 
 
