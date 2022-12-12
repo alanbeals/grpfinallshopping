@@ -115,4 +115,10 @@ public class CheckoutActivity extends AppCompatActivity {
         finish();
     }
 
+    public void Return(View view){
+        Intent i=new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(i);
+        finish();
+    }
+
 }

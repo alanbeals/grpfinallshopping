@@ -71,4 +71,14 @@ public class Order {
         this.orderItems = new ArrayList<>();
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", shippingAddress='" + shippingAddress + '\'' +
+                ", orderDate='" + orderDate + '\'' +
+                ", orderItems=" + orderItems +
+                '}';
+    }
 }

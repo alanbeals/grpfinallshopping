@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="85dp"
             android:ems="10"
-            android:hint="Email"
+            android:hint="Address"
             android:inputType="textEmailAddress" />
 
         <EditText
@@ -42,12 +42,6 @@
             android:ems="10"
             android:inputType="phone"
             android:hint="Number"/>
-
-        <Button
-            android:id="@+id/BTN_Credit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Credit Info" />
 
         <Button
             android:id="@+id/BTN_Home"

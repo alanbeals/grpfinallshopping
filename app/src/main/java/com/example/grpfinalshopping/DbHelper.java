@@ -1,10 +1,14 @@
 package com.example.grpfinalshopping;
 
+import static android.content.ContentValues.TAG;
+
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -133,14 +137,22 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public void addUser(String fullName, String phoneNumber, String address)
     {
+        Log.d(TAG, "addUser: cont check 0");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-
+        Log.d(TAG, "addUser: cont check 1");
         values.put(USER_FULL_NAME_COL, fullName);
+
+        Log.d(TAG, "addUser: cont check 2");
         values.put(USER_PHONE_NUMBER_COL, phoneNumber);
+
+        Log.d(TAG, "addUser: cont check 3");
         values.put(USER_ADDRESS_COL, address);;
 
+        Log.d(TAG, "addUser: cont check 4");
         db.insert(USER_TABLE, null, values);
+
+        Log.d(TAG, "addUser: cont check 5");
         db.close();
     }
 
@@ -214,6 +226,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    @SuppressLint("NewApi")
     public void placeOrder(int userId)
     {
         SQLiteDatabase db = this.getWritableDatabase();

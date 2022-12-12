@@ -1,5 +1,7 @@
 package entities;
 
+import androidx.annotation.NonNull;
+
 public class OrderItem {
 
     private int id;
@@ -76,5 +78,17 @@ public class OrderItem {
         this.pricePerUnit = pricePerUnit;
         this.quantity = quantity;
         this.product = product;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "id=" + id +
+                ", orderId=" + orderId +
+                ", productId=" + productId +
+                ", pricePerUnit=" + pricePerUnit +
+                ", quantity=" + quantity +
+                ", product=" + product.toString() +
+                '}';
     }
 }
