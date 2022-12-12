@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:rowCount="10"
-        android:columnCount="2">
+        android:columnCount="3">
 
 
         <!--ITEMS-->
@@ -59,6 +59,10 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingTop="10dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/apple1"/>
         <Button
             android:id="@+id/BTN_AddApple"
             android:layout_width="wrap_content"
@@ -75,6 +79,10 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingTop="10dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/banana1"/>
         <Button
             android:id="@+id/BTN_AddBanana"
             android:layout_width="wrap_content"
@@ -91,6 +99,10 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingTop="10dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cherry1"/>
         <Button
             android:id="@+id/BTN_AddCherry"
             android:layout_width="wrap_content"
@@ -107,6 +119,10 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingTop="10dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/grape1"/>
         <Button
             android:id="@+id/BTN_AddGrape"
             android:layout_width="wrap_content"
@@ -123,6 +139,10 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingTop="10dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/orange1"/>
         <Button
             android:id="@+id/BTN_AddOrange"
             android:layout_width="wrap_content"
@@ -139,6 +159,10 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingTop="10dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/carrot1"/>
         <Button
             android:id="@+id/BTN_AddCarrot"
             android:layout_width="wrap_content"
@@ -155,6 +179,10 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingTop="10dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/celery1"/>
         <Button
             android:id="@+id/BTN_AddCelery"
             android:layout_width="wrap_content"
@@ -171,6 +199,10 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingTop="10dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/onion1"/>
         <Button
             android:id="@+id/BTN_AddOnion"
             android:layout_width="wrap_content"
@@ -187,6 +219,10 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingTop="10dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/potato1"/>
         <Button
             android:id="@+id/BTN_AddPotato"
             android:layout_width="wrap_content"
@@ -203,6 +239,10 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingTop="10dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tomato1"/>
         <Button
             android:id="@+id/BTN_AddTomato"
             android:layout_width="wrap_content"
