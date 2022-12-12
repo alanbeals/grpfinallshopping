@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.graphics.Typeface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import entities.Product;
 
 public class MainActivity extends AppCompatActivity {
 
+    DbHelper dbHelper;
+
     GridLayout productsListContainer;
     ArrayList<Product> products;
 
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         productsListContainer = findViewById(R.id.GL_ProductsListContainer);
 
-        DbHelper dbHelper = new DbHelper(this);
+        dbHelper = new DbHelper(this);
 
         products = dbHelper.getAllProducts();
 
@@ -115,6 +118,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void OpenCart(View view){
+        Intent i=new Intent(getApplicationContext(),CheckoutActivity.class);
+        startActivity(i);
+        finish();
+    }
 
+    public void OpenSettings(View view){
+        Intent i=new Intent(getApplicationContext(),ProfileActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    public void addItemToCart(View view){
+        Button btn = findViewById(view.getId());
+
+        dbHelper.addToCart(1, btn.getId());
     }
 }
