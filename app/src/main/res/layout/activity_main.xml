@@ -1,45 +1,259 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/TV_Groceries"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Groceries"
-        android:textColor="@android:color/background_dark"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/IV_Cart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/imageView2"
-        app:srcCompat="@drawable/ic_cart_black" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/TV_Groceries"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Groceries"
+                android:textColor="@android:color/background_dark"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/IV_Setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView"
-        app:srcCompat="@drawable/ic_settings" />
+            <ImageView
+                android:id="@+id/IV_Cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="150dp"
+                app:srcCompat="@drawable/ic_cart_black" />
 
-    <ListView
-        android:id="@+id/LV_Items"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:divider="@color/material_blue_grey_800"
-        android:dividerHeight="1dp" />
-</LinearLayout>
+            <ImageView
+                android:id="@+id/IV_Setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="200dp"
+                app:srcCompat="@drawable/ic_settings" />
+
+
+            <!--PRODUCT GRID-->
+            <GridLayout
+                android:id="@+id/GL_ProductsListContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="100dp"
+                android:rowCount="10"
+                android:columnCount="4">
+
+                <!--    <ListView-->
+                <!--        android:id="@+id/simpleListView"-->
+                <!--        android:layout_width="fill_parent"-->
+                <!--        android:layout_height="wrap_content"-->
+                <!--        android:divider="#2740CF"-->
+                <!--        android:dividerHeight="1dp"-->
+                <!--        />-->
+
+
+
+
+                <!--ITEMS-->
+
+                <!--APPLE-->
+                <!--        <TextView-->
+                <!--            android:id="@+id/TV_Apple"-->
+                <!--            android:layout_width="130sp"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Apple"-->
+                <!--            android:textSize="20sp"-->
+                <!--            android:textStyle="bold"-->
+                <!--            android:paddingTop="10dp"/>-->
+                <!--        <Button-->
+                <!--            android:id="@+id/BTN_AddApple"-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Add to Cart">-->
+                <!--        </Button>-->
+
+                <!--        &lt;!&ndash;BANANA&ndash;&gt;-->
+                <!--        <TextView-->
+                <!--            android:id="@+id/TV_Banana"-->
+                <!--            android:layout_width="130sp"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Banana"-->
+                <!--            android:textSize="20sp"-->
+                <!--            android:textStyle="bold"-->
+                <!--            android:paddingTop="10dp"/>-->
+                <!--        <Button-->
+                <!--            android:id="@+id/BTN_AddBanana"-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Add to Cart">-->
+                <!--        </Button>-->
+
+                <!--        &lt;!&ndash;CHERRY&ndash;&gt;-->
+                <!--        <TextView-->
+                <!--            android:id="@+id/TV_Cherry"-->
+                <!--            android:layout_width="130sp"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Cherry"-->
+                <!--            android:textSize="20sp"-->
+                <!--            android:textStyle="bold"-->
+                <!--            android:paddingTop="10dp"/>-->
+                <!--        <Button-->
+                <!--            android:id="@+id/BTN_AddCherry"-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Add to Cart">-->
+                <!--        </Button>-->
+
+                <!--        &lt;!&ndash;GRAPE&ndash;&gt;-->
+                <!--        <TextView-->
+                <!--            android:id="@+id/TV_Grape"-->
+                <!--            android:layout_width="130sp"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Grape"-->
+                <!--            android:textSize="20sp"-->
+                <!--            android:textStyle="bold"-->
+                <!--            android:paddingTop="10dp"/>-->
+                <!--        <Button-->
+                <!--            android:id="@+id/BTN_AddGrape"-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Add to Cart">-->
+                <!--        </Button>-->
+
+                <!--        &lt;!&ndash;ORANGE&ndash;&gt;-->
+                <!--        <TextView-->
+                <!--            android:id="@+id/TV_Orange"-->
+                <!--            android:layout_width="130sp"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Orange"-->
+                <!--            android:textSize="20sp"-->
+                <!--            android:textStyle="bold"-->
+                <!--            android:paddingTop="10dp"/>-->
+                <!--        <Button-->
+                <!--            android:id="@+id/BTN_AddOrange"-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Add to Cart">-->
+                <!--        </Button>-->
+
+                <!--        &lt;!&ndash;CARROT&ndash;&gt;-->
+                <!--        <TextView-->
+                <!--            android:id="@+id/TV_Carrot"-->
+                <!--            android:layout_width="130sp"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Carrot"-->
+                <!--            android:textSize="20sp"-->
+                <!--            android:textStyle="bold"-->
+                <!--            android:paddingTop="10dp"/>-->
+                <!--        <Button-->
+                <!--            android:id="@+id/BTN_AddCarrot"-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Add to Cart">-->
+                <!--        </Button>-->
+
+                <!--        &lt;!&ndash;CELERY&ndash;&gt;-->
+                <!--        <TextView-->
+                <!--            android:id="@+id/TV_Celery"-->
+                <!--            android:layout_width="130sp"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Celery"-->
+                <!--            android:textSize="20sp"-->
+                <!--            android:textStyle="bold"-->
+                <!--            android:paddingTop="10dp"/>-->
+                <!--        <Button-->
+                <!--            android:id="@+id/BTN_AddCelery"-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Add to Cart">-->
+                <!--        </Button>-->
+
+                <!--        &lt;!&ndash;ONION&ndash;&gt;-->
+                <!--        <TextView-->
+                <!--            android:id="@+id/TV_Onion"-->
+                <!--            android:layout_width="130sp"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Onion"-->
+                <!--            android:textSize="20sp"-->
+                <!--            android:textStyle="bold"-->
+                <!--            android:paddingTop="10dp"/>-->
+                <!--        <Button-->
+                <!--            android:id="@+id/BTN_AddOnion"-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Add to Cart">-->
+                <!--        </Button>-->
+
+                <!--        &lt;!&ndash;POTATO&ndash;&gt;-->
+                <!--        <TextView-->
+                <!--            android:id="@+id/TV_Potato"-->
+                <!--            android:layout_width="130sp"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Potato"-->
+                <!--            android:textSize="20sp"-->
+                <!--            android:textStyle="bold"-->
+                <!--            android:paddingTop="10dp"/>-->
+                <!--        <Button-->
+                <!--            android:id="@+id/BTN_AddPotato"-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Add to Cart">-->
+                <!--        </Button>-->
+
+                <!--        &lt;!&ndash;TOMATO&ndash;&gt;-->
+                <!--        <TextView-->
+                <!--            android:id="@+id/TV_Tomato"-->
+                <!--            android:layout_width="130sp"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Tomato"-->
+                <!--            android:textSize="20sp"-->
+                <!--            android:textStyle="bold"-->
+                <!--            android:paddingTop="10dp"/>-->
+                <!--        <Button-->
+                <!--            android:id="@+id/BTN_AddTomato"-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="Add to Cart">-->
+                <!--        </Button>-->
+
+                <!--        <TextView-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="testing"-->
+                <!--            android:layout_row="0"-->
+                <!--            android:layout_column="0"/>-->
+                <!--        <TextView-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="testing"-->
+                <!--            android:layout_row="0"-->
+                <!--            android:layout_column="1"/>-->
+
+                <!--        <TextView-->
+                <!--            android:layout_width="wrap_content"-->
+                <!--            android:layout_height="wrap_content"-->
+                <!--            android:text="testing"-->
+                <!--            android:layout_row="1"-->
+                <!--            android:layout_column="0"/>-->
+
+
+
+
+
+            </GridLayout>
+
+
+        </RelativeLayout>
+
+
+    </HorizontalScrollView>
+
+
+
+</ScrollView>
