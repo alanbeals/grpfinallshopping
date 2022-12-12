@@ -32,8 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="85dp"
             android:ems="10"
-            android:inputType="textEmailAddress"
-            android:hint="Email"/>
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/ET_Phone"
@@ -53,7 +53,8 @@
             android:id="@+id/BTN_Home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Home" />
+            android:text="Home"
+            android:onClick="ReturnHome"/>
 
         <ImageView
             android:layout_width="match_parent"

@@ -99,6 +99,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.insert(PRODUCT_TABLE, null, values);
         db.close();
     }
+
     public ArrayList<Product> getAllProducts()
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -296,9 +297,14 @@ public class DbHelper extends SQLiteOpenHelper {
         db.insert(ORDER_ITEM_TABLE, null, values);
     }
 
-
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        // Drop older table if exist
+        db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + ORDER_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + ORDER_ITEM_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + PRODUCT_TABLE);
+        // Create tables again
+        onCreate(db);
     }
 }
