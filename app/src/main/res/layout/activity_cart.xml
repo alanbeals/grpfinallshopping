@@ -37,11 +37,10 @@
         <Button
 
             android:id="@+id/BTN_Remove"
-            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Remove from Cart"
-            android:paddingRight="50dp">
+            android:paddingRight="5dp">
 
         </Button>
 
@@ -49,8 +48,7 @@
             android:id="@+id/BTN_Checkout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Proceed to Checkout"
-            style="?android:attr/buttonBarButtonStyle">
+            android:text="Proceed to Checkout">
 
         </Button>
     </LinearLayout>

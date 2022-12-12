@@ -436,7 +436,6 @@ public class DbHelper extends SQLiteOpenHelper {
         db.insert(ORDER_ITEM_TABLE, null, values);
     }
 
-
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         // Drop older table if exist

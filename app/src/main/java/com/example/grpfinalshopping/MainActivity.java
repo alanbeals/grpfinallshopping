@@ -2,6 +2,7 @@ package com.example.grpfinalshopping;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.util.Log;
@@ -12,6 +13,9 @@ import entities.Order;
 import entities.User;
 
 public class MainActivity extends AppCompatActivity {
+
+    DbHelper dbHelper;
+    ListView lstView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void OpenCart(View view){
+        Intent i=new Intent(getApplicationContext(),CheckoutActivity.class);
+        startActivity(i);
+        finish();
+    }
 
+    public void OpenSettings(View view){
+        Intent i=new Intent(getApplicationContext(),ProfileActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    public void addItemToCart(View view){
+        Button btn = findViewById(view.getId());
+
+        dbHelper.addToCart(1, btn.getId());
     }
 }
