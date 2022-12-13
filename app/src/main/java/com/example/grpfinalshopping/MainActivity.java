@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(MainActivity.this, product.getProductName() + ": added to cart", Toast.LENGTH_LONG).show();
-                    dbHelper.addToCart(1, product.getProductId());
+                    dbHelper.addToCart(1, product.getId());
                 }
             });
 

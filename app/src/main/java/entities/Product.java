@@ -6,6 +6,10 @@ public class Product {
     private String name;
     private double price;
 
+    public Product() {
+
+    }
+
     public String getProductName() {
         return name;
     }
@@ -21,7 +25,12 @@ public class Product {
         this.price = price;
     }
 
-    public Product(String name, double price) {
+    public int getId() {
+        return id;
+    }
+
+    public Product(Integer id, String name, double price) {
+        this.id = id;
         this.name = name;
         this.price = price;
     }
