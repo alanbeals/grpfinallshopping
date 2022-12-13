@@ -6,6 +6,7 @@ import androidx.core.content.res.ResourcesCompat;
 import android.graphics.Typeface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -34,6 +35,19 @@ public class MainActivity extends AppCompatActivity {
         productsListContainer = findViewById(R.id.GL_ProductsListContainer);
 
         dbHelper = new DbHelper(this);
+
+//        dbHelper.addUser("Anakin Skywalker", "111-111-1111", "111 Some Galaxy, Kitchener, ON, A2A 2A2");
+//
+//        dbHelper.addProduct("Apple", 0.99);
+//        dbHelper.addProduct("Banana", 0.3);
+//        dbHelper.addProduct("Cherry", 3.97);
+//        dbHelper.addProduct("Grape", 8.75);
+//        dbHelper.addProduct("Orange", 0.92);
+//        dbHelper.addProduct("Carrot", 2.47);
+//        dbHelper.addProduct("Celery", 2.97);
+//        dbHelper.addProduct("Onion", 2.47);
+//        dbHelper.addProduct("Potato", 3.97);
+//        dbHelper.addProduct("Tomato", 0.78);
 
         products = dbHelper.getAllProducts();
 
@@ -101,19 +115,7 @@ public class MainActivity extends AppCompatActivity {
             productImage.getLayoutParams().width = 120;
         }
 
-//        dbHelper.addUser("Anakin Skywalker", "111-111-1111", "111 Some Galaxy, Kitchener, ON, A2A 2A2");
-//
-//        dbHelper.addProduct("Apple", 0.99);
-//        dbHelper.addProduct("Banana", 0.3);
-//        dbHelper.addProduct("Cherry", 3.97);
-//        dbHelper.addProduct("Grape", 8.75);
-//        dbHelper.addProduct("Orange", 0.92);
-//        dbHelper.addProduct("Carrot", 2.47);
-//        dbHelper.addProduct("Celery", 2.97);
-//        dbHelper.addProduct("Onion", 2.47);
-//        dbHelper.addProduct("Potato", 3.97);
-//        dbHelper.addProduct("Tomato", 0.78);
-
+        dbHelper.removeItemFromCart(1, 2);
 
     }
 
