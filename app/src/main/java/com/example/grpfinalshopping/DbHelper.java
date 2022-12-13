@@ -137,22 +137,14 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public void addUser(String fullName, String phoneNumber, String address)
     {
-        Log.d(TAG, "addUser: cont check 0");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        Log.d(TAG, "addUser: cont check 1");
+
         values.put(USER_FULL_NAME_COL, fullName);
-
-        Log.d(TAG, "addUser: cont check 2");
         values.put(USER_PHONE_NUMBER_COL, phoneNumber);
-
-        Log.d(TAG, "addUser: cont check 3");
         values.put(USER_ADDRESS_COL, address);;
 
-        Log.d(TAG, "addUser: cont check 4");
         db.insert(USER_TABLE, null, values);
-
-        Log.d(TAG, "addUser: cont check 5");
         db.close();
     }
 
@@ -226,7 +218,66 @@ public class DbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    @SuppressLint("NewApi")
+    public void decreaseItemQuantityInCart(int userId, int productId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int orderId = getIncompleteOrderId(userId);
+
+        if (orderId == -1)
+        {
+            return;
+        }
+
+        int orderItemId = getOrderItemId(orderId, productId);
+
+        if (orderItemId == -1)
+        {
+            return;
+        }
+
+        int orderItemQuantityInCart = getOrderItemQuantityById(orderItemId);
+
+        String sql = "";
+
+        if(orderItemQuantityInCart > 1)
+        {
+            sql = "UPDATE " + ORDER_ITEM_TABLE
+                    + " SET " + ORDER_ITEM_QUANTITY_COL + " = " + ORDER_ITEM_QUANTITY_COL + " -1"
+                    + " WHERE " + ID_COL + " = " + orderItemId;
+        }
+        else
+        {
+            sql = "DELETE FROM " + ORDER_ITEM_TABLE + " WHERE " + ID_COL + " = " + orderItemId;
+        }
+
+        db.execSQL(sql);
+        db.close();
+    }
+
+    public void removeItemFromCart(int userId, int productId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int orderId = getIncompleteOrderId(userId);
+
+        if (orderId == -1)
+        {
+            return;
+        }
+
+        int orderItemId = getOrderItemId(orderId, productId);
+
+        if (orderItemId == -1)
+        {
+            return;
+        }
+
+        String sql = "DELETE FROM " + ORDER_ITEM_TABLE + " WHERE " + ID_COL + " = " + orderItemId;
+        db.execSQL(sql);
+        db.close();
+    }
+
     public void placeOrder(int userId)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -341,6 +392,24 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
         return orderItems;
+    }
+
+    private int getOrderItemQuantityById(int orderItemId)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cr = db.rawQuery("SELECT " + ORDER_ITEM_QUANTITY_COL
+                        + " FROM " + ORDER_ITEM_TABLE
+                        + " WHERE " + ID_COL + " = " + orderItemId
+                , null);
+
+        cr.moveToFirst();
+
+        int quantity = cr.getCount() == 0
+                ? -1
+                : cr.getInt(0);
+
+        return quantity;
     }
 
 

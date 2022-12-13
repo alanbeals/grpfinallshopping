@@ -103,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
             productImage.getLayoutParams().width = 120;
         }
 
+        dbHelper.removeItemFromCart(1, 2);
+
     }
 
     public void OpenCart(View view){
