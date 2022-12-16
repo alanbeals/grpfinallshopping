@@ -23,16 +23,17 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/ET_Name"
+            android:id="@+id/fullNameET"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:paddingTop="10dp"
-            android:text="Name" />
+            android:layout_marginTop="30dp"
+            android:text="Full name" />
 
         <EditText
-            android:id="@+id/RY_Email"
+            android:id="@+id/addressET"
             android:layout_width="match_parent"
             android:layout_height="85dp"
             android:ems="10"
@@ -40,7 +41,7 @@
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/ET_Phone"
+            android:id="@+id/phoneET"
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:ems="10"
@@ -48,11 +49,13 @@
             android:hint="Number"/>
 
         <Button
-            android:id="@+id/BTN_Home"
+            android:id="@+id/saveChangesBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Home"
-            android:onClick="ReturnHome"/>
+            android:onClick="UpdateUserProfile"
+            android:text="Save Changes"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="40dp"/>
 
     </LinearLayout>
 </LinearLayout>

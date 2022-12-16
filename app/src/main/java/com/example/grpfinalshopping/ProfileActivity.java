@@ -1,15 +1,9 @@
 package com.example.grpfinalshopping;
 
-import static android.content.ContentValues.TAG;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.service.autofill.RegexValidator;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,7 +16,7 @@ import entities.User;
 
 public class ProfileActivity  extends AppCompatActivity {
 
-    EditText name, address, number;
+    EditText fullName, address, phone;
     DbHelper dbHelper;
     User user;
 
@@ -36,36 +30,63 @@ public class ProfileActivity  extends AppCompatActivity {
 
         dbHelper = new DbHelper(this);
 
-        name = (EditText) findViewById(R.id.ET_Name);
-        address = (EditText) findViewById(R.id.RY_Email);
-        number = (EditText) findViewById(R.id.ET_Phone);
+        fullName = (EditText) findViewById(R.id.fullNameET);
+        address = (EditText) findViewById(R.id.addressET);
+        phone = (EditText) findViewById(R.id.phoneET);
 
         user = dbHelper.getUserById(1);
 
         if (user.getUserId() == 0){
             dbHelper.addUser("", "", "");
         }
-        name.setText(user.getFullName());
+        fullName.setText(user.getFullName());
         address.setText(user.getAddress());
-        number.setText(user.getPhone());
+        phone.setText(user.getPhone());
 
         dbHelper = new DbHelper(this);
     }
 
-    public void ReturnHome(View view){
-        if (!Pattern.matches("^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$", number.getText().toString())){
-            Toast.makeText(this, "Phone number not in a recognized format", Toast.LENGTH_LONG).show();
-            return;
+    public void UpdateUserProfile(View view){
+
+
+//        if (!Pattern.matches("^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$", phone.getText().toString())){
+//            Toast.makeText(this, "Phone number not in a recognized format", Toast.LENGTH_LONG).show();
+//            return;
+//        }
+
+        if(VerifyFieldsAreInformed())
+        {
+            dbHelper.updateUserProfile(1,
+                    fullName.getText().toString(),
+                    phone.getText().toString(),
+                    address.getText().toString());
+
+            Toast.makeText(this, "Your profile has been updated successfully!", Toast.LENGTH_LONG).show();
         }
 
-        dbHelper.updateUserProfile(1,
-                name.getText().toString(),
-                number.getText().toString(),
-                address.getText().toString());
+    }
 
-        Intent i=new Intent(getApplicationContext(),MainActivity.class);
-        startActivity(i);
-        finish();
+    private boolean VerifyFieldsAreInformed(){
+
+        if (fullName.length() == 0){
+            fullName.setError("Full name is required");
+            return false;
+        }
+        if (phone.length() == 0){
+            phone.setError("Phone number is required");
+            return false;
+        }
+        else if(!Pattern.compile("^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$").matcher(phone.getText().toString()).matches()){
+            phone.setError("Phone number is invalid");
+            return false;
+        }
+
+        if (address.length() == 0){
+            address.setError("Address is required");
+            return false;
+        }
+
+        return true;
     }
 
     @Override
