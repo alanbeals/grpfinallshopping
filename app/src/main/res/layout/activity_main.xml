@@ -11,36 +11,21 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <TextView
                 android:id="@+id/TV_Groceries"
-                android:layout_width="wrap_content"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="45dp"
                 android:layout_marginTop="16dp"
-                android:text="Groceries"
-                android:textColor="@android:color/background_dark"
-                android:textSize="24sp"
+                android:fontFamily="@font/alata"
+                android:text="Fruits and Vegetables delivered at your door!"
+                android:textAlignment="center"
+                android:textColor="@color/purple_500"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/IV_Cart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="150dp"
-                android:onClick="OpenCart"
-                app:srcCompat="@drawable/ic_cart_black" />
-
-            <ImageView
-                android:id="@+id/IV_Setting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="200dp"
-                android:onClick="OpenSettings"
-                app:srcCompat="@drawable/ic_settings" />
-
 
             <!--PRODUCT GRID-->
             <GridLayout

@@ -3,6 +3,7 @@ package com.example.grpfinalshopping;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,21 +13,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
 import entities.Order;
 import entities.OrderItem;
-import entities.Product;
 
 public class CheckoutActivity extends AppCompatActivity {
 
     DbHelper dbHelper;
 
     GridLayout productsListContainer;
+    Button placeOrder;
+    TextView cartIsEmpty, orderTotal;
+
     Order order;
 
     @Override
@@ -34,7 +38,17 @@ public class CheckoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         productsListContainer = findViewById(R.id.GL_ProductsListContainer);
+        placeOrder = findViewById(R.id.BTN_Order);
+        cartIsEmpty = findViewById(R.id.cartIsEmptyTV);
+        orderTotal = findViewById(R.id.orderTotalTV);
+
+        placeOrder.setVisibility(View.INVISIBLE);
+        cartIsEmpty.setVisibility(View.INVISIBLE);
+        orderTotal.setVisibility(View.INVISIBLE);
 
         dbHelper = new DbHelper(this);
 
@@ -45,6 +59,7 @@ public class CheckoutActivity extends AppCompatActivity {
             OrderItem orderItem = order.getOrderItems().get(i);
             TextView productName = new TextView(this);
             TextView productPrice = new TextView(this);
+            TextView productQuantity = new TextView(this);
             Button removeFromCartBtn = new Button(this);
             ImageView productImage = new ImageView(this);
 
@@ -54,7 +69,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            linearParams.setMargins(0, 0, 110, 100);
+            linearParams.setMargins(0, 0, 85, 100);
 
             productName.setTextSize(20);
             productName.setTypeface(null, Typeface.BOLD);
@@ -66,24 +81,32 @@ public class CheckoutActivity extends AppCompatActivity {
             productPrice.setTextSize(20);
             productPrice.setTypeface(null, Typeface.BOLD);
             productPrice.setPadding(0, 10, 0,0);
-            productPrice.setText(String.format("$%.2f", orderItem.getProduct().getProductPrice()));
+            productPrice.setText(String.format("$%.2f", orderItem.getProduct().getProductPrice()*orderItem.getQuantity()));
             productPrice.setLayoutParams(gridParams);
             productPrice.setLayoutParams(linearParams);
 
-            removeFromCartBtn.setLayoutParams(
-                    new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT
-                    )
-            );
+            productQuantity.setTextSize(20);
+            productQuantity.setTypeface(null, Typeface.BOLD);
+            productQuantity.setPadding(0, 10, 0,0);
+            productQuantity.setText(orderItem.getQuantity()+"un.");
+            productQuantity.setLayoutParams(gridParams);
+            productQuantity.setLayoutParams(linearParams);
 
-            removeFromCartBtn.setText("remove");
+            LinearLayout.LayoutParams linearParamsForBtn = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            linearParamsForBtn.width = 130;
+            removeFromCartBtn.setText("X");
+            removeFromCartBtn.setLayoutParams(linearParamsForBtn);
 
             removeFromCartBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(CheckoutActivity.this, orderItem.getProduct().getProductName() + ": removed from cart", Toast.LENGTH_LONG).show();
-//                    dbHelper.addToCart(1, product.getProductId());
+                    dbHelper.removeItemFromCart(1, orderItem.getProductId());
+                    Toast.makeText(CheckoutActivity.this, orderItem.getProduct().getProductName() + ": removed from cart", Toast.LENGTH_SHORT).show();
+                    finish();
+                    startActivity(getIntent());
                 }
             });
 
@@ -97,6 +120,7 @@ public class CheckoutActivity extends AppCompatActivity {
             if (productsListContainer != null) {
                 productsListContainer.addView(productImage);
                 productsListContainer.addView(productName);
+                productsListContainer.addView(productQuantity);
                 productsListContainer.addView(productPrice);
                 productsListContainer.addView(removeFromCartBtn);
             }
@@ -104,21 +128,37 @@ public class CheckoutActivity extends AppCompatActivity {
             productImage.getLayoutParams().height = 120;
             productImage.getLayoutParams().width = 120;
         }
+
+        if(order.getOrderItems().size() > 0) {
+            placeOrder.setVisibility(View.VISIBLE);
+            cartIsEmpty.setVisibility(View.INVISIBLE);
+            orderTotal.setVisibility(View.VISIBLE);
+            orderTotal.setText("Total: " + String.format("$%.2f", order.getOrderTotalPrice(order.getId())));
+        }
+        else {
+            placeOrder.setVisibility(View.INVISIBLE);
+            cartIsEmpty.setVisibility(View.VISIBLE);
+            orderTotal.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void PlaceOrder(View view){
         dbHelper.placeOrder(1);
         Toast.makeText(this, "Order Placed", Toast.LENGTH_LONG).show();
 
-        Intent i=new Intent(getApplicationContext(),MainActivity.class);
+        Intent i=new Intent(getApplicationContext(),YourOrdersActivity.class);
         startActivity(i);
         finish();
     }
 
-    public void Return(View view){
-        Intent i=new Intent(getApplicationContext(),MainActivity.class);
-        startActivity(i);
-        finish();
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

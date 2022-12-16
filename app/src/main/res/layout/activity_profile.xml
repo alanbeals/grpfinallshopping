@@ -11,50 +11,79 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/TV_Profile"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/alata"
             android:text="Profile"
-            android:textSize="30dp"
-            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>
+            android:textAlignment="center"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="Full name:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"/>
 
         <EditText
-            android:id="@+id/ET_Name"
+            android:id="@+id/fullNameET"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:paddingTop="10dp"
-            android:text="Name" />
+            android:text="Full name" />
+
+
+        <TextView
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="Address:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"/>
 
         <EditText
-            android:id="@+id/RY_Email"
+            android:id="@+id/addressET"
             android:layout_width="match_parent"
-            android:layout_height="85dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Address"
             android:inputType="textEmailAddress" />
 
+
+        <TextView
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="Phone number:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"/>
+
         <EditText
-            android:id="@+id/ET_Phone"
+            android:id="@+id/phoneET"
             android:layout_width="match_parent"
-            android:layout_height="72dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="phone"
             android:hint="Number"/>
 
         <Button
-            android:id="@+id/BTN_Home"
-            android:layout_width="match_parent"
+            android:id="@+id/saveChangesBTN"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Home"
-            android:onClick="ReturnHome"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:src="@drawable/grocery_sign"/>
+            android:onClick="UpdateUserProfile"
+            android:text="Save Changes"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="40dp"/>
 
     </LinearLayout>
 </LinearLayout>

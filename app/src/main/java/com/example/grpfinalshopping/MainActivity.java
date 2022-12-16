@@ -6,9 +6,11 @@ import androidx.core.content.res.ResourcesCompat;
 import android.graphics.Typeface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
             Product product = products.get(i);
             TextView productName = new TextView(this);
             TextView productPrice = new TextView(this);
-            Button addToCartBtn = new Button(this);
             ImageView productImage = new ImageView(this);
+            ImageView addToCartBtn = new ImageView(this);
 
             ViewGroup.LayoutParams gridParams = new GridLayout.LayoutParams(GridLayout.spec(i), GridLayout.spec(1));
 
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            linearParams.setMargins(0, 0, 110, 100);
+            linearParams.setMargins(0, 0, 150, 100);
 
             productName.setTextSize(20);
             productName.setTypeface(null, Typeface.BOLD);
@@ -68,24 +70,16 @@ public class MainActivity extends AppCompatActivity {
             productPrice.setLayoutParams(gridParams);
             productPrice.setLayoutParams(linearParams);
 
-            addToCartBtn.setLayoutParams(
-                new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-            );
-
-            addToCartBtn.setText("Add");
+            addToCartBtn.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.add_icon, null));
+            addToCartBtn.setClickable(true);
 
             addToCartBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(MainActivity.this, product.getProductName() + ": added to cart", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, product.getProductName() + ": added to cart", Toast.LENGTH_SHORT).show();
                     dbHelper.addToCart(1, product.getId());
                 }
             });
-
-            productImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.apple, null));
 
             int productDrawableId = this.getResources().getIdentifier(product.getProductName().toLowerCase(Locale.ROOT), "drawable", this.getPackageName());
 
@@ -102,20 +96,49 @@ public class MainActivity extends AppCompatActivity {
             productImage.getLayoutParams().height = 120;
             productImage.getLayoutParams().width = 120;
         }
-
-        dbHelper.removeItemFromCart(1, 2);
-
     }
 
-    public void OpenCart(View view){
-        Intent i=new Intent(getApplicationContext(),CheckoutActivity.class);
-        startActivity(i);
-        finish();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.user_menu, menu);
+        return true;
     }
 
-    public void OpenSettings(View view){
-        Intent i=new Intent(getApplicationContext(),ProfileActivity.class);
-        startActivity(i);
-        finish();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.profileMenu:
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
+                        startActivity(i);
+                    }
+                },0);
+                return true;
+            case R.id.yourCartMenu:
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(getApplicationContext(), CheckoutActivity.class);
+                        startActivity(i);
+                    }
+                }, 0);
+                return true;
+            case R.id.yourOrdersMenu:
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(getApplicationContext(), YourOrdersActivity.class);
+                        startActivity(i);
+                    }
+                }, 0);
+                return true;
+            default:
+                return true;
+        }
     }
 }

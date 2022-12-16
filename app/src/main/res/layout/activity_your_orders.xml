@@ -11,62 +11,36 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
-
-
-            <!--ORDER ITEM GRID-->
             <TextView
                 android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/alata"
-                android:text="Your cart"
+                android:text="Your orders"
                 android:textAlignment="center"
                 android:textColor="@color/purple_500"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+
+            <!--ORDER ITEM GRID-->
             <GridLayout
                 android:id="@+id/GL_ProductsListContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:columnCount="5"
+                android:columnCount="2"
                 android:paddingTop="100dp"
-                android:rowCount="10">
+                android:rowCount="100">
             </GridLayout>
 
             <TextView
-                android:id="@+id/orderTotalTV"
+                android:id="@+id/pastOrdersIsEmptyTV"
                 android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/GL_ProductsListContainer"
                 android:fontFamily="@font/alata"
-                android:textAlignment="center"
-                android:textColor="@color/purple_500"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="50dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/BTN_Order"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/orderTotalTV"
-                android:layout_marginLeft="120dp"
-                android:layout_marginTop="30dp"
-                android:onClick="PlaceOrder"
-                android:text="Place Order" />
-
-            <TextView
-                android:id="@+id/cartIsEmptyTV"
-                android:layout_width="260dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/GL_ProductsListContainer"
-                android:fontFamily="@font/alata"
-                android:text="Your cart is currently empty..."
+                android:text="You currently don't have any past orders..."
                 android:textAlignment="center"
                 android:textColor="@color/purple_500"
                 android:layout_marginTop="30dp"
