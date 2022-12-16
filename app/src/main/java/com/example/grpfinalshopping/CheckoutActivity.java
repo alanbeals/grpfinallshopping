@@ -71,7 +71,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            linearParams.setMargins(0, 0, 75, 100);
+            linearParams.setMargins(0, 0, 85, 100);
 
             productName.setTextSize(20);
             productName.setTypeface(null, Typeface.BOLD);

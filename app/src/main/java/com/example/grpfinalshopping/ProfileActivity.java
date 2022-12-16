@@ -42,17 +42,9 @@ public class ProfileActivity  extends AppCompatActivity {
         fullName.setText(user.getFullName());
         address.setText(user.getAddress());
         phone.setText(user.getPhone());
-
-        dbHelper = new DbHelper(this);
     }
 
     public void UpdateUserProfile(View view){
-
-
-//        if (!Pattern.matches("^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$", phone.getText().toString())){
-//            Toast.makeText(this, "Phone number not in a recognized format", Toast.LENGTH_LONG).show();
-//            return;
-//        }
 
         if(VerifyFieldsAreInformed())
         {

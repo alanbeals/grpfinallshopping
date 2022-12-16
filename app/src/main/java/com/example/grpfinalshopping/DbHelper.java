@@ -157,7 +157,6 @@ public class DbHelper extends SQLiteOpenHelper {
     public User getUserById(int userId)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
 
         Cursor cr = db.rawQuery("SELECT " + ID_COL + ", " + USER_FULL_NAME_COL + ", " + USER_PHONE_NUMBER_COL + ", " + USER_ADDRESS_COL
                         + " FROM " + USER_TABLE
@@ -280,6 +279,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
         if(orderId != -1)
         {
+            String shipping_address = getUserAddress(userId);
+            values.put(ORDER_SHIPPING_ADDRESS_COL, shipping_address);
             values.put(ORDER_DATE_COL, String.valueOf(LocalDateTime.now()));
             db.update(ORDER_TABLE, values,"id=?", new String[]{String.valueOf(orderId)});
             db.close();
