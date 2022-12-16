@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:columnCount="2"
                 android:paddingTop="100dp"
-                android:rowCount="50">
+                android:rowCount="100">
             </GridLayout>
 
             <TextView

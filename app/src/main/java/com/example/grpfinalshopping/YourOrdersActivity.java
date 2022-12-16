@@ -1,39 +1,24 @@
 package com.example.grpfinalshopping;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RestrictTo;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.lifecycle.DefaultLifecycleObserver;
 
-import java.lang.reflect.Array;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+import java.util.Collections;
+import java.util.Comparator;
 
 import entities.Order;
-import entities.OrderItem;
 
 public class YourOrdersActivity extends AppCompatActivity {
 
@@ -42,7 +27,7 @@ public class YourOrdersActivity extends AppCompatActivity {
     GridLayout productsListContainer;
     TextView pastOrdersIsEmpty;
 
-    ArrayList<Order> order;
+    ArrayList<Order> completedOrders;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +45,16 @@ public class YourOrdersActivity extends AppCompatActivity {
 
         dbHelper = new DbHelper(this);
 
-        order = dbHelper.getCompletedOrdersByUserId(1);
+        completedOrders = dbHelper.getCompletedOrdersByUserId(1);
 
-        if(order.size() == 0) {
+        Collections.sort(completedOrders, new OrderComparator());
+
+        if(completedOrders.size() == 0) {
             pastOrdersIsEmpty.setVisibility(View.VISIBLE);
             return;
         }
 
-        for(int i=0; i < order.size(); i++) {
+        for(int i=0; i < completedOrders.size(); i++) {
 
             ImageView deliveredImage = new ImageView(this);
             TextView shippingAddress = new TextView(this);
@@ -92,13 +79,13 @@ public class YourOrdersActivity extends AppCompatActivity {
 
             shippingAddress.setTextSize(20);
             shippingAddress.setPadding(0, 10, 0,0);
-            shippingAddress.setText(order.get(i).getShippingAddress());
+            shippingAddress.setText(completedOrders.get(i).getShippingAddress());
             shippingAddress.setLayoutParams(gridParams);
             shippingAddress.setLayoutParams(linearParams);
             shippingAddress.setTextAppearance(R.style.fontForYourOrdersList);
             shippingAddress.setGravity(0);
 
-            String formattedDate = order.get(i).getOrderDate().substring(0, order.get(i).getOrderDate().indexOf("T"));
+            String formattedDate = completedOrders.get(i).getOrderDate().substring(0, completedOrders.get(i).getOrderDate().indexOf("T"));
 
             datePlaced.setTextSize(20);
             datePlaced.setPadding(0, 10, 0,0);
@@ -110,7 +97,7 @@ public class YourOrdersActivity extends AppCompatActivity {
 
             orderTotal.setTextSize(20);
             orderTotal.setPadding(0, 10, 0,0);
-            orderTotal.setText("Total: $" + order.get(i).getOrderTotalPrice(order.get(i).getId()));
+            orderTotal.setText("Total: $" + completedOrders.get(i).getOrderTotalPrice(completedOrders.get(i).getId()));
             orderTotal.setLayoutParams(gridParams);
             orderTotal.setLayoutParams(linearParamsForPrice);
             orderTotal.setTextAppearance(R.style.fontForYourOrdersList);
@@ -126,19 +113,17 @@ public class YourOrdersActivity extends AppCompatActivity {
                 productsListContainer.addView(datePlaced);
                 productsListContainer.addView(orderTotal);
             }
-//
+
             deliveredImage.getLayoutParams().height = 120;
             deliveredImage.getLayoutParams().width = 120;
         }
     }
 
-    public void PlaceOrder(View view){
-        dbHelper.placeOrder(1);
-        Toast.makeText(this, "Order Placed", Toast.LENGTH_LONG).show();
-
-        Intent i=new Intent(getApplicationContext(),MainActivity.class);
-        startActivity(i);
-        finish();
+    public class OrderComparator implements Comparator<Order>
+    {
+        public int compare(Order left, Order right) {
+            return right.getOrderDate().compareTo(left.getOrderDate());
+        }
     }
 
     @Override

@@ -70,25 +70,8 @@ public class MainActivity extends AppCompatActivity {
             productPrice.setLayoutParams(gridParams);
             productPrice.setLayoutParams(linearParams);
 
-//            addToCartBtn.setLayoutParams(
-//                new LinearLayout.LayoutParams(
-//                        ViewGroup.LayoutParams.WRAP_CONTENT,
-//                        ViewGroup.LayoutParams.WRAP_CONTENT
-//                )
-//            );
-
             addToCartBtn.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.add_icon, null));
             addToCartBtn.setClickable(true);
-
-//            addToCartBtn.setText("Add");
-
-//            addToCartBtn.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Toast.makeText(MainActivity.this, product.getProductName() + ": added to cart", Toast.LENGTH_LONG).show();
-//                    dbHelper.addToCart(1, product.getId());
-//                }
-//            });
 
             addToCartBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
