@@ -22,28 +22,56 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+
+        <TextView
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="Full name:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"/>
+
         <EditText
             android:id="@+id/fullNameET"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:paddingTop="10dp"
-            android:layout_marginTop="30dp"
             android:text="Full name" />
+
+
+        <TextView
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="Address:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"/>
 
         <EditText
             android:id="@+id/addressET"
             android:layout_width="match_parent"
-            android:layout_height="85dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Address"
             android:inputType="textEmailAddress" />
 
+
+        <TextView
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alata"
+            android:text="Phone number:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"/>
+
         <EditText
             android:id="@+id/phoneET"
             android:layout_width="match_parent"
-            android:layout_height="72dp"
+            android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="phone"
             android:hint="Number"/>
