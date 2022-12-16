@@ -31,12 +31,9 @@ public class CheckoutActivity extends AppCompatActivity {
 
     GridLayout productsListContainer;
     Button placeOrder;
-    TextView cartIsEmpty;
+    TextView cartIsEmpty, orderTotal;
 
     Order order;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +46,11 @@ public class CheckoutActivity extends AppCompatActivity {
         productsListContainer = findViewById(R.id.GL_ProductsListContainer);
         placeOrder = findViewById(R.id.BTN_Order);
         cartIsEmpty = findViewById(R.id.cartIsEmptyTV);
+        orderTotal = findViewById(R.id.orderTotalTV);
 
         placeOrder.setVisibility(View.INVISIBLE);
         cartIsEmpty.setVisibility(View.INVISIBLE);
+        orderTotal.setVisibility(View.INVISIBLE);
 
         dbHelper = new DbHelper(this);
 
@@ -62,6 +61,7 @@ public class CheckoutActivity extends AppCompatActivity {
             OrderItem orderItem = order.getOrderItems().get(i);
             TextView productName = new TextView(this);
             TextView productPrice = new TextView(this);
+            TextView productQuantity = new TextView(this);
             Button removeFromCartBtn = new Button(this);
             ImageView productImage = new ImageView(this);
 
@@ -71,7 +71,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            linearParams.setMargins(0, 0, 110, 100);
+            linearParams.setMargins(0, 0, 75, 100);
 
             productName.setTextSize(20);
             productName.setTypeface(null, Typeface.BOLD);
@@ -83,18 +83,24 @@ public class CheckoutActivity extends AppCompatActivity {
             productPrice.setTextSize(20);
             productPrice.setTypeface(null, Typeface.BOLD);
             productPrice.setPadding(0, 10, 0,0);
-            productPrice.setText(String.format("$%.2f", orderItem.getProduct().getProductPrice()));
+            productPrice.setText(String.format("$%.2f", orderItem.getProduct().getProductPrice()*orderItem.getQuantity()));
             productPrice.setLayoutParams(gridParams);
             productPrice.setLayoutParams(linearParams);
 
-            removeFromCartBtn.setLayoutParams(
-                    new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT
-                    )
-            );
+            productQuantity.setTextSize(20);
+            productQuantity.setTypeface(null, Typeface.BOLD);
+            productQuantity.setPadding(0, 10, 0,0);
+            productQuantity.setText(orderItem.getQuantity()+"un.");
+            productQuantity.setLayoutParams(gridParams);
+            productQuantity.setLayoutParams(linearParams);
 
-            removeFromCartBtn.setText("remove");
+            LinearLayout.LayoutParams linearParamsForBtn = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+            linearParamsForBtn.width = 130;
+            removeFromCartBtn.setText("X");
+            removeFromCartBtn.setLayoutParams(linearParamsForBtn);
 
             removeFromCartBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -116,6 +122,7 @@ public class CheckoutActivity extends AppCompatActivity {
             if (productsListContainer != null) {
                 productsListContainer.addView(productImage);
                 productsListContainer.addView(productName);
+                productsListContainer.addView(productQuantity);
                 productsListContainer.addView(productPrice);
                 productsListContainer.addView(removeFromCartBtn);
             }
@@ -127,10 +134,13 @@ public class CheckoutActivity extends AppCompatActivity {
         if(order.getOrderItems().size() > 0) {
             placeOrder.setVisibility(View.VISIBLE);
             cartIsEmpty.setVisibility(View.INVISIBLE);
+            orderTotal.setVisibility(View.VISIBLE);
+            orderTotal.setText("Total: " + String.format("$%.2f", order.getOrderTotalPrice(order.getId())));
         }
         else {
             placeOrder.setVisibility(View.INVISIBLE);
             cartIsEmpty.setVisibility(View.VISIBLE);
+            orderTotal.setVisibility(View.INVISIBLE);
         }
     }
 
