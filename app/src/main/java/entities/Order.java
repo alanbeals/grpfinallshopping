@@ -57,6 +57,23 @@ public class Order {
         this.orderItems = orderItems;
     }
 
+    public double getOrderTotalPrice(int orderId){
+
+        double totalPrice = 0;
+
+        ArrayList<OrderItem> orderItems = this.getOrderItems();
+
+        for (OrderItem item: orderItems
+             ) {
+
+            totalPrice = totalPrice + (item.getQuantity() * item.getPricePerUnit());
+
+        }
+
+        return totalPrice;
+
+    }
+
     public Order()
     {
         this.orderItems = new ArrayList<>();

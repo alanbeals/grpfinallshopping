@@ -138,16 +138,10 @@ public class CheckoutActivity extends AppCompatActivity {
         dbHelper.placeOrder(1);
         Toast.makeText(this, "Order Placed", Toast.LENGTH_LONG).show();
 
-        Intent i=new Intent(getApplicationContext(),MainActivity.class);
+        Intent i=new Intent(getApplicationContext(),YourOrdersActivity.class);
         startActivity(i);
         finish();
     }
-
-//    public void Return(View view){
-//        Intent i=new Intent(getApplicationContext(),MainActivity.class);
-//        startActivity(i);
-//        finish();
-//    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

@@ -98,8 +98,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            productImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.apple, null));
-
             int productDrawableId = this.getResources().getIdentifier(product.getProductName().toLowerCase(Locale.ROOT), "drawable", this.getPackageName());
 
             productImage.setImageResource(productDrawableId);
@@ -143,6 +141,15 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Intent i = new Intent(getApplicationContext(), CheckoutActivity.class);
+                        startActivity(i);
+                    }
+                }, 0);
+                return true;
+            case R.id.yourOrdersMenu:
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = new Intent(getApplicationContext(), YourOrdersActivity.class);
                         startActivity(i);
                     }
                 }, 0);
