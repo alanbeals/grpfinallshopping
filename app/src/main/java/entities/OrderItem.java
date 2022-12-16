@@ -1,7 +1,5 @@
 package entities;
 
-import androidx.annotation.NonNull;
-
 public class OrderItem {
 
     private int id;

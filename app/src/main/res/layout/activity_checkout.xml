@@ -11,36 +11,19 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
-
             <TextView
-                android:id="@+id/TV_Groceries"
-                android:layout_width="wrap_content"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="45dp"
                 android:layout_marginTop="16dp"
-                android:text="Place Order"
-                android:textColor="@android:color/background_dark"
-                android:textSize="24sp"
+                android:fontFamily="@font/alata"
+                android:text="Your cart"
+                android:textAlignment="center"
+                android:textColor="#28BD0C"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/BTN_Order"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="150dp"
-                android:text="Place Order"
-                android:onClick="PlaceOrder"/>
-
-            <Button
-                android:id="@+id/return_home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="300dp"
-                android:text="Return"
-                android:onClick="Return"/>
 
 
             <!--ORDER ITEM GRID-->
@@ -51,9 +34,33 @@
                 android:columnCount="4"
                 android:paddingTop="100dp"
                 android:rowCount="10">
-
-
             </GridLayout>
+
+            <Button
+                android:id="@+id/BTN_Order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/GL_ProductsListContainer"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="30dp"
+                android:onClick="PlaceOrder"
+                android:text="Place Order" />
+
+            <TextView
+                android:id="@+id/cartIsEmptyTV"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/GL_ProductsListContainer"
+                android:fontFamily="@font/alata"
+                android:text="Your cart is currently empty..."
+                android:textAlignment="center"
+                android:textColor="#28BD0C"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="50dp"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </RelativeLayout>
     </HorizontalScrollView>
 </ScrollView>

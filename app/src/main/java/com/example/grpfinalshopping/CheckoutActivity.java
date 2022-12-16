@@ -3,6 +3,7 @@ package com.example.grpfinalshopping;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
@@ -29,12 +32,20 @@ public class CheckoutActivity extends AppCompatActivity {
     GridLayout productsListContainer;
     Order order;
 
+    Button placeOrder, goBackToMain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         productsListContainer = findViewById(R.id.GL_ProductsListContainer);
+        placeOrder = findViewById(R.id.BTN_Order);
+
+        placeOrder.setVisibility(View.INVISIBLE);
 
         dbHelper = new DbHelper(this);
 
@@ -82,8 +93,10 @@ public class CheckoutActivity extends AppCompatActivity {
             removeFromCartBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(CheckoutActivity.this, orderItem.getProduct().getProductName() + ": removed from cart", Toast.LENGTH_LONG).show();
-//                    dbHelper.addToCart(1, product.getProductId());
+                    dbHelper.removeItemFromCart(1, orderItem.getProductId());
+                    Toast.makeText(CheckoutActivity.this, orderItem.getProduct().getProductName() + ": removed from cart", Toast.LENGTH_SHORT).show();
+                    finish();
+                    startActivity(getIntent());
                 }
             });
 
@@ -104,6 +117,10 @@ public class CheckoutActivity extends AppCompatActivity {
             productImage.getLayoutParams().height = 120;
             productImage.getLayoutParams().width = 120;
         }
+
+        if(order.getOrderItems().size() > 0) {
+            placeOrder.setVisibility(View.VISIBLE);
+        }
     }
 
     public void PlaceOrder(View view){
@@ -115,10 +132,20 @@ public class CheckoutActivity extends AppCompatActivity {
         finish();
     }
 
-    public void Return(View view){
-        Intent i=new Intent(getApplicationContext(),MainActivity.class);
-        startActivity(i);
-        finish();
+//    public void Return(View view){
+//        Intent i=new Intent(getApplicationContext(),MainActivity.class);
+//        startActivity(i);
+//        finish();
+//    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
