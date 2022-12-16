@@ -18,12 +18,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
 import entities.Order;
 import entities.OrderItem;
-import entities.Product;
 
 public class CheckoutActivity extends AppCompatActivity {
 
