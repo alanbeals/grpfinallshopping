@@ -30,9 +30,13 @@ public class CheckoutActivity extends AppCompatActivity {
     DbHelper dbHelper;
 
     GridLayout productsListContainer;
+    Button placeOrder;
+    TextView cartIsEmpty;
+
     Order order;
 
-    Button placeOrder, goBackToMain;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +48,10 @@ public class CheckoutActivity extends AppCompatActivity {
 
         productsListContainer = findViewById(R.id.GL_ProductsListContainer);
         placeOrder = findViewById(R.id.BTN_Order);
+        cartIsEmpty = findViewById(R.id.cartIsEmptyTV);
 
         placeOrder.setVisibility(View.INVISIBLE);
+        cartIsEmpty.setVisibility(View.INVISIBLE);
 
         dbHelper = new DbHelper(this);
 
@@ -120,6 +126,11 @@ public class CheckoutActivity extends AppCompatActivity {
 
         if(order.getOrderItems().size() > 0) {
             placeOrder.setVisibility(View.VISIBLE);
+            cartIsEmpty.setVisibility(View.INVISIBLE);
+        }
+        else {
+            placeOrder.setVisibility(View.INVISIBLE);
+            cartIsEmpty.setVisibility(View.VISIBLE);
         }
     }
 

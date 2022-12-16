@@ -21,7 +21,7 @@
                 android:fontFamily="@font/alata"
                 android:text="Fruits and Vegetables delivered at your door!"
                 android:textAlignment="center"
-                android:textColor="#28BD0C"
+                android:textColor="@color/purple_500"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"

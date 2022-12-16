@@ -19,11 +19,9 @@
                 android:fontFamily="@font/alata"
                 android:text="Your cart"
                 android:textAlignment="center"
-                android:textColor="#28BD0C"
+                android:textColor="@color/purple_500"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textStyle="bold" />
 
 
             <!--ORDER ITEM GRID-->
@@ -54,7 +52,7 @@
                 android:fontFamily="@font/alata"
                 android:text="Your cart is currently empty..."
                 android:textAlignment="center"
-                android:textColor="#28BD0C"
+                android:textColor="@color/purple_500"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="50dp"
                 android:textSize="20sp"

@@ -11,12 +11,16 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/TV_Profile"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/alata"
             android:text="Profile"
-            android:textSize="30dp"
-            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>
+            android:textAlignment="center"
+            android:textColor="@color/purple_500"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/ET_Name"
@@ -45,16 +49,10 @@
 
         <Button
             android:id="@+id/BTN_Home"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Home"
             android:onClick="ReturnHome"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:src="@drawable/grocery_sign"/>
 
     </LinearLayout>
 </LinearLayout>

@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.service.autofill.RegexValidator;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.regex.Pattern;
@@ -27,6 +30,9 @@ public class ProfileActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         dbHelper = new DbHelper(this);
 
@@ -60,5 +66,15 @@ public class ProfileActivity  extends AppCompatActivity {
         Intent i=new Intent(getApplicationContext(),MainActivity.class);
         startActivity(i);
         finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
